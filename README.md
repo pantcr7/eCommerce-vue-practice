@@ -1,6 +1,6 @@
 ## Ecommerce Vue
 
-Ecommerce
+### Tools used (Frappe Framework, Vue, Tailwind CSS, Frappe-UI)
 
 #### License
 
