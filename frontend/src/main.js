@@ -1,8 +1,12 @@
 import './index.css'
 
-import { createApp } from 'vue'
+import { createApp, reactive } from 'vue'
 import router from './router'
 import App from './App.vue'
+import Toast from "vue-toastification";
+// Import the CSS or use your own!
+import "vue-toastification/dist/index.css";
+
 
 import {
   Button,
@@ -15,8 +19,32 @@ import {
 
 let app = createApp(App)
 
+
+let cartData = localStorage.getItem('cart')
+if (cartData) {
+  cartData= JSON.parse(cartData)
+}
+else {
+  localStorage.setItem('cart', JSON.stringify({items: []}))
+  cartData = {items: []}
+}
+
 setConfig('resourceFetcher', frappeRequest)
 
+const cart = reactive(
+  cartData
+)
+
+
+const options = {
+  position: "bottom-right",
+};
+
+
+app.use(Toast, options);
+
+
+app.provide('cart', cart)
 app.use(router)
 app.use(resourcesPlugin)
 
